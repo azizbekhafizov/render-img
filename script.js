@@ -13,17 +13,30 @@ fetch(`https://api.unsplash.com/photos/?client_id=${accessKey}`)
       container.appendChild(img);
 
       img.addEventListener('click', () => {
-        modal.innerHTML = `
-          <p onclick="closeFn()">X</p>
-          <img src="${photo.urls.regular}" class="modal-img">
-          <button id="likeBtn">❤</button>
-        `;
+        modal.innerHTML = `<div class="loading-text">Loading...</div>`;
         modal.style.display = 'block';
 
-        const likeBtn = document.getElementById('likeBtn');
-        likeBtn.addEventListener('click', () => {
-          likeBtn.classList.toggle('liked');
-        });
+        setTimeout(() => {
+          modal.innerHTML = `
+            <div class="close-btn" onclick="closeFn()">X</div>
+            <img src="${photo.urls.regular}" class="modal-img" />
+            <div style="margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+              <button id="likeBtn">❤</button>
+              <span id="likeCount">${photo.likes}</span>
+            </div>
+          `;
+
+          const likeBtn = document.getElementById('likeBtn');
+          const likeCount = document.getElementById('likeCount');
+          let liked = false;
+
+          likeBtn.addEventListener('click', () => {
+            liked = !liked;
+            likeBtn.classList.toggle('liked');
+            let count = parseInt(likeCount.textContent);
+            likeCount.textContent = liked ? count + 1 : count - 1;
+          });
+        }, 2000);
       });
     });
   });
@@ -33,3 +46,22 @@ function closeFn() {
   modal.innerHTML = '';
   modal.style.display = 'none';
 }
+
+
+const menuIcon = document.getElementById('menu-icon');
+const sidebar = document.getElementById('sidebar');
+const closeBtn = document.getElementById('close-btn');
+
+menuIcon.addEventListener('click', () => {
+  sidebar.classList.add('open');
+});
+
+closeBtn.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+});
+
+document.addEventListener('click', (e) => {
+  if (!sidebar.contains(e.target) && !menuIcon.contains(e.target)) {
+    sidebar.classList.remove('open');
+  }
+});

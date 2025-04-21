@@ -5,6 +5,7 @@
 }
 
 
+
 #image__container {
     display: flex;
     flex-wrap: wrap;
@@ -83,4 +84,103 @@
   
   #likeBtn.liked {
     color: red;
+  }
+
+
+
+
+  nav {
+    background: #1e1e2f;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #00ffe0;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 25px;
+    padding: 0 25px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
+    transition: color 0.3s;
+    font-size: 20px;
+  }
+
+  .nav-links a:hover {
+    color: #00ffe0;
+  }
+
+  .menu-icon {
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: none;
+  }
+
+  .sidebar{
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+
+    .menu-icon {
+      display: block;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -250px;
+      height: 100%;
+      width: 250px;
+      background: #1e1e2f;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      transition: right 0.3s ease-in-out;
+      z-index: 20;
+    }
+
+    .sidebar a {
+      padding: 15px 0;
+      border-bottom: 1px solid #333;
+      color: #fff;
+      font-size: 1.1rem;
+      text-decoration: none;
+    }
+
+    .sidebar.open {
+      right: 0;
+    }
+
+    .close-btn {
+      align-self: flex-end;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+  }
+
+
+  .loading-text{
+    font-size: 50px;
+    text-align: center;
+    margin-top: 250px;
+
   }
